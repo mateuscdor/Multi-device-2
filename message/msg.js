@@ -774,7 +774,7 @@ conn.sendMessage(from, {
 			      }, { quoted: msg })
  })
  } catch(err) {
-  var data = await fetchJson(`https://masgimenz.my.id/facebook/?url=args[1]`)
+   data = await fetchJson(`https://masgimenz.my.id/facebook/?url=args[1]`)
 conn.sendMessage(from, {
 				 video: { url: data.videoUrl },
 				 caption: `✅Sukses Download Video Facebook
