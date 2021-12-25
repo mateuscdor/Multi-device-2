@@ -10,7 +10,7 @@ RUN apt-get update && \
   webp \
 
 COPY package.json .
-RUN npm install -g npm@latest
+RUN npm install -g npm@8.3.0
 RUN npm install -g pm2
 RUN npm update
 COPY . .
