@@ -60,8 +60,9 @@ module.exports = async(conn, msg, m, setting) => {
 		const content = JSON.stringify(msg.message)
 		const fromMe = msg.key.fromMe
 		const from = msg.key.remoteJid
-		const chats = (type === 'conversation' && msg.message.conversation) ? msg.message.conversation : (type == 'imageMessage') && msg.message.imageMessage.caption ? msg.message.imageMessage.caption : (type == 'documentMessage') && msg.message.documentMessage.caption ? msg.message.documentMessage.caption : (type == 'videoMessage') && msg.message.videoMessage.caption ? msg.message.videoMessage.caption : (type == 'extendedTextMessage') && msg.message.extendedTextMessage.text ? msg.message.extendedTextMessage.text : (type == 'buttonsResponseMessage' && msg.message.buttonsResponseMessage.selectedButtonId) ? msg.message.buttonsResponseMessage.selectedButtonId : (type == 'templateButtonReplyMessage') && msg.message.templateButtonReplyMessage.selectedId ? msg.message.templateButtonReplyMessage.selectedId : ''
-		const toJSON = j => JSON.stringify(j, null,'\t')
+		//const chats = (type === 'conversation' && msg.message.conversation) ? msg.message.conversation : (type == 'imageMessage') && msg.message.imageMessage.caption ? msg.message.imageMessage.caption : (type == 'documentMessage') && msg.message.documentMessage.caption ? msg.message.documentMessage.caption : (type == 'videoMessage') && msg.message.videoMessage.caption ? msg.message.videoMessage.caption : (type == 'extendedTextMessage') && msg.message.extendedTextMessage.text ? msg.message.extendedTextMessage.text : (type == 'buttonsResponseMessage' && msg.message.buttonsResponseMessage.selectedButtonId) ? msg.message.buttonsResponseMessage.selectedButtonId : (type == 'templateButtonReplyMessage') && msg.message.templateButtonReplyMessage.selectedId ? msg.message.templateButtonReplyMessage.selectedId : ''
+		const chats = (type === 'conversation' && msg.message.conversation) ? msg.message.conversation : (type == 'imageMessage') && msg.message.imageMessage.caption ? msg.message.imageMessage.caption : (type == 'documentMessage') && msg.message.documentMessage.caption ? msg.message.documentMessage.caption : (type == 'videoMessage') && msg.message.videoMessage.caption ? msg.message.videoMessage.caption : (type == 'extendedTextMessage') && msg.message.extendedTextMessage.text ? msg.message.extendedTextMessage.text : (type == 'buttonsResponseMessage' && msg.message.buttonsResponseMessage.selectedButtonId) ? msg.message.buttonsResponseMessage.selectedButtonId : (type == 'templateButtonReplyMessage') && msg.message.templateButtonReplyMessage.selectedId ? msg.message.templateButtonReplyMessage.selectedId : (type === 'listResponseMessage') && msg.message.listResponseMessage.singleSelectReply.selectedRowId ? msg.message.listResponseMessage.singleSelectReply.selectedRowId : '';
+                const toJSON = j => JSON.stringify(j, null,'\t')
 		const Json = j => JSON.stringify(j, null,'\t')
 		const jsonformat = j => JSON.stringify(j, null,'\t')
 		if (conn.multi) {
@@ -275,23 +276,29 @@ reply(`${stdout}`)
 		
 		switch(command) {
 case prefix+'yts': case prefix+'ytsearch':
-try {
-        	var aramas = await yts(q);
-   			} catch {
-        	reply(mess.error.api)
-    		}
-    		aramat = aramas.all 
-    		var ytresult = '';
-    		ytresult += '「 *YOUTUBE SEARCH* 」'
-    		ytresult += '\n________________________\n\n'
-   			aramas.all.map((video) => {
-        	ytresult += '❏ Title: ' + video.title + '\n'
-            ytresult += '❏ Link: ' + video.url + '\n'
-            ytresult += '❏ Durasi: ' + video.timestamp + '\n'
-            ytresult += '❏ Upload: ' + video.ago + '\n________________________\n\n'
-    		});
-    		ytresult += `◩ *${botName}*`
-sendFileFromUrl(m.chat, `${aramat[0].image}`, ytresult, m)
+if (args.length === 1) return reply(`Contoh:\n${command} bukti Virgoun`)
+let list_rows = [];
+            const data = await yts(q);
+for(let a of data.all) {
+list_rows.push({
+title: a.title, description: `Channel: ${a.author.name} | Durasi: ${a.duration}`, rowId: `${prefix}yt ${a.url}`
+})
+}
+    const button = {
+        title: `Hasil Pencarian Dari`,
+        description: "Silahkan Tap Tombol Dibawah!",
+        footerText: `Create by Wans-Bot`,
+        buttonText: 'Tap Disini!',
+        listType: 'SINGLE_SELECT',
+        sections: [
+            {
+                title: "Hasil Pencarian", 
+                rows: list_rows
+            }
+        ]
+        }
+        const templateList = generateWAMessageFromContent(from, proto.Message.fromObject({ "listMessage": button }), {});
+        conn.relayMessage(from, templateList.message, { messageId: templateList.key.id });
 break
 case prefix+'meadmin':
 if (!isOwner) return 
@@ -323,6 +330,7 @@ case prefix+'infoall': case prefix+'tagall': case prefix+'mentionall':
 conn.sendMessage(from, { text: tekss, mentions: groupMembers.map(a => a.id) }, { quoted: m })
 break
 case prefix+'chord':
+if (args.length === 1) return reply(`Contoh:\n${command} bukti Virgoun`)
 chord(q).then(res => 
 reply(`Chord dari lagu ${q}\n${res.chord}`)).catch(err => {
 	reply(`Chord Dari Lagu ${q} tidak ditemukan!!!`)
