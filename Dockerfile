@@ -7,7 +7,6 @@ RUN apt-get update && \
   ffmpeg \
   wget \
   imagemagick \
-  graphicsmagick \
   webp \
 
 COPY package.json .
