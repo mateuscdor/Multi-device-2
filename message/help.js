@@ -14,6 +14,7 @@ exports.allmenu = (conn, prefix, pushname, ucapanWaktu) => {
 *Search Menu*
 ≻ ${prefix}brainly _teks_
 ≻ ${prefix}google _teks_
+≻ ${prefix}couple
 ≻ ${prefix}ytsearch _query_
 ≻ ${prefix}chord _query_
 ≻ ${prefix}lirik _query_
