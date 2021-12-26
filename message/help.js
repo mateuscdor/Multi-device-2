@@ -24,6 +24,7 @@ exports.allmenu = (conn, prefix, pushname, ucapanWaktu) => {
 
 *Converter/Tools*
 ≻ ${prefix}sticker
+≻ ${prefix}attp
 ≻ ${prefix}toimg
 ≻ ${prefix}tovid
 ≻ ${prefix}style _teks_
