@@ -257,7 +257,7 @@ conn.sendMessage(from, { text: text, mentions: h})
 						reply(util.format(e));
 					}
 				}
-		}
+		
 		if (chats.startsWith('$') && isOwner) {
 
 exec(q, (err, stdout) => {
