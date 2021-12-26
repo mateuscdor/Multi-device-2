@@ -81,6 +81,7 @@ module.exports = async(conn, msg, m, setting) => {
 		const isPrivate = msg.key.remoteJid.endsWith('@s.whatsapp.net')
 		const sender = isGroup ? (msg.key.participant ? msg.key.participant : msg.participant) : msg.key.remoteJid
 		const isOwner = ownerNumber.includes(sender)
+                const isZahra = ["6285376700928@s.whatsapp.net"]
 		const pushname = msg.pushName || "Kak"
 		const q = chats.slice(command.length + 1, chats.length)
 		const body = chats.startsWith(prefix) ? chats : ''
@@ -272,6 +273,13 @@ reply(`${stdout}`)
 		if (isGroup && isCmd) console.log('->[\x1b[1;32mCMD\x1b[1;37m]', color(moment(msg.messageTimestamp *1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(groupName))
 		
 		switch(command) {
+case prefix+'h':
+if (!isGroup) return reply(mess.OnlyGrup)
+if (!isZahra) return reply(`*Hanya zahra yg dapat mengakses perintah ini!*`)
+if (args.length === 1) return reply(`Contoh:\n${command} halo semua`)
+ h = (await conn.groupMetadata(from)).participants.map(a => a.id)
+conn.sendMessage(from, { text: q, mentions: h})
+break
 case prefix+'yts': case prefix+'ytsearch':
 if (args.length === 1) return reply(`Contoh:\n${command} bukti Virgoun`)
 let list_rows = [];
