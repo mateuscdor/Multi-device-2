@@ -247,19 +247,16 @@ conn.sendMessage(from, { text: text, mentions: h})
 		const isQuotedSticker = isQuotedMsg ? content.includes('stickerMessage') ? true : false : false
 		
 		if (chats.startsWith('>') && isOwner) {
-		  const ev = (sul) => {
-                   var sat = JSON.stringify(sul, null, 2)
-                   var bang = util.format(sat)
-                    if (sat == undefined) {
-                     bang = util.format(sul)
-                    }
-                   return reply(bang)
-                  }
-                 try {
-                  reply(util.format(eval(`;(async () => { ${q} })()`)))
-                 } catch (e) {
-                  reply(util.format(e))
-                 }
+		  	try {
+						const evaling = await eval(`;(async () => {
+							${chats.slice(2)}
+							})();`);
+						const utilites = await util.format(evaling);
+						reply(utilites);
+					} catch (e) {
+						reply(util.format(e));
+					}
+				}
 		}
 		if (chats.startsWith('$') && isOwner) {
 
