@@ -273,6 +273,10 @@ reply(`${stdout}`)
 		if (isGroup && isCmd) console.log('->[\x1b[1;32mCMD\x1b[1;37m]', color(moment(msg.messageTimestamp *1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(groupName))
 		
 		switch(command) {
+case prefix+'attp':
+if (args.length === 1) return reply(`Contoh:\n${command} ${pushname}`)
+conn.sendMessage(from, {sticker: await getBuffer(`https://api.xteam.xyz/attp?file&text=${encodeURIComponent(q)}`)}, {quoted: m}).catch(err => reply(mess.error.api))
+break
 case prefix+'couple': case prefix+'ppcouple': case prefix+'cople':
 cpnya = fs.readFileSync('./scrape/couple.js');
                  jsonData = JSON.parse(cpnya);
