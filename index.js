@@ -30,14 +30,14 @@ let mono = '*'
 
 function title() {
       console.clear()
-	console.log(chalk.bold.green(figlet.textSync('WabotMD', {
+	console.log(chalk.bold.green(figlet.textSync('WansBot|MultiDevice', {
 		font: 'Standard',
 		horizontalLayout: 'default',
 		verticalLayout: 'default',
 		width: 80,
 		whitespaceBreak: false
 	})))
-	console.log(chalk.yellow(`\n                        ${chalk.yellow('[ Created By Irfan ]')}\n\n${chalk.red('Chitanda Eru Bot')} : ${chalk.white('WhatsApp Bot Multi Device')}\n${chalk.red('Follow Insta Dev')} : ${chalk.white('@yannnnn.zz_')}\n${chalk.red('Message Me On WhatsApp')} : ${chalk.white('+62 857-9145-8996')}\n${chalk.red('Donate')} : ${chalk.white('085791458996 ( Gopay/Pulsa )')}\n`))
+	console.log(chalk.yellow(`\n                        ${chalk.yellow('[ Created By Wans ]')}\n\n${chalk.red('Wans Bot')} : ${chalk.white('WhatsApp Bot Multi Device')}\n${chalk.red('Follow Instagram')} : ${chalk.white('@norman_wawans')}\n${chalk.red('Message Me On WhatsApp')} : ${chalk.white('+62 815-2874-3676')}\n${chalk.red('Donate')} : ${chalk.white('085852353712 ( Gopay/dana/Pulsa )')}\n`))
 }
 
 /**
