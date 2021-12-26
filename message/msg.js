@@ -273,12 +273,13 @@ reply(`${stdout}`)
 		if (isGroup && isCmd) console.log('->[\x1b[1;32mCMD\x1b[1;37m]', color(moment(msg.messageTimestamp *1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(groupName))
 		
 		switch(command) {
-case prefix+'h':
-if (!isGroup) return reply(mess.OnlyGrup)
-if (!isZahra) return reply(`*Hanya zahra yg dapat mengakses perintah ini!*`)
-if (args.length === 1) return reply(`Contoh:\n${command} halo semua`)
- h = (await conn.groupMetadata(from)).participants.map(a => a.id)
-conn.sendMessage(from, { text: q, mentions: h})
+case prefix+'couple': case prefix+'ppcouple': case prefix+'cople':
+cpnya = fs.readFileSync('./scrape/couple.js');
+                 jsonData = JSON.parse(cpnya);
+                 randIndex = Math.floor(Math.random() * jsonData.length);
+                 randKey = jsonData[randIndex];
+sendFileFromUrl(m.chat, randKey.male, 'Cowo', m)
+sendFileFromUrl(m.chat, randKey.female, 'cewe', m)
 break
 case prefix+'yts': case prefix+'ytsearch':
 if (args.length === 1) return reply(`Contoh:\n${command} bukti Virgoun`)
