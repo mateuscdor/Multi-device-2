@@ -10,6 +10,7 @@ exports.allmenu = (conn, prefix, pushname, ucapanWaktu) => {
 ≻ ${prefix}instagram _link_
 ≻ ${prefix}facebook _link_
 ≻ ${prefix}twitter _link_
+≻ ${prefix}igstory _username ig_
 
 *Search Menu*
 ≻ ${prefix}brainly _teks_
@@ -19,11 +20,6 @@ exports.allmenu = (conn, prefix, pushname, ucapanWaktu) => {
 ≻ ${prefix}chord _query_
 ≻ ${prefix}lirik _query_
 
-*Bmkg Menu*
-≻ ${prefix}cuaca _daerah_
-≻ ${prefix}infogempa
-
-*Converter/Tools*
 ≻ ${prefix}sticker
 ≻ ${prefix}attp
 ≻ ${prefix}toimg
