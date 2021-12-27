@@ -606,7 +606,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 
             break
 case prefix+'donate': case prefix +'donasi': case prefix+'hargasewa':
-tekssa = `Halo @${sender.split("@s.whatsapp.net")[0]}👋
+tekssa = `Halo @${sender.split("@s.whatsapp.net")[0]} 👋
 Berikut adalah list harga untuk sewa bot ini
 *💸Payment💰*
 *•Gopay:* 085852353712
