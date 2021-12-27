@@ -639,7 +639,7 @@ conn.sendMessage(from, { text: tekssa, contextInfo: { mentionedJid: [sender]} },
 break
 			case prefix+'owner':
 			    for (let x of ownerNumber) {
-			      sendContact(from, x.split('@s.whatsapp.net')[0], 'Pwmilik bot ini', msg)
+			      sendContact(from, x.split('@s.whatsapp.net')[0], 'Pemilik bot ini', msg)
 			    }
 			    break
 	/*<------- Converter/Tools ------->*/
