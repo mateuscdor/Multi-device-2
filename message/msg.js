@@ -234,7 +234,7 @@ conn.sendMessage(from, { text: text, mentions: h})
 			{ urlButton: { displayText: `Website!`, url : `http://api-xcoders.xyz/`} },
 			{ quickReplyButton: { displayText: `🧑 Owner`, id: `${prefix}owner` } },
 			{ quickReplyButton: { displayText: `💰Sewa Bot `, id: `${prefix}donate` } },
-			{ quickReplyButton: { displayText: `📶 Statistic`, id: `${prefix}stat` } }
+			{ quickReplyButton: { displayText: `📶 Runtime`, id: `${prefix}runtime` } }
 		]
         
 		const isImage = (type == 'imageMessage')
@@ -563,7 +563,7 @@ let anu = allmenu(conn, prefix, pushname, ucapanWaktu)
 		            reply('Test, sukses respon!')
 			    break
 			case prefix+'runtime':
-			    reply(runtime(process.uptime()))
+			reply(`Bot Aktif Sejak\n${runtime(process.uptime())}`)
 			    break
 			case prefix+'speed': case prefix+'ping': case prefix+'stat': case prefix+'statistic':
                 let timestamp = speed()
@@ -606,7 +606,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 
             break
 case prefix+'donate': case prefix +'donasi': case prefix+'hargasewa':
-tekss = `Halo @${sender.split("@s.whatsapp.net")[0]}👋
+tekssa = `Halo @${sender.split("@s.whatsapp.net")[0]}👋
 Berikut adalah list harga untuk sewa bot ini
 *💸Payment💰*
 *•Gopay:* 085852353712
@@ -619,7 +619,7 @@ Berikut adalah list harga untuk sewa bot ini
 =>Pembayaran menggunakan payment diatas
 =>Hitungan sewa bot atau user premium adalah bulanan/1bulan (Tidak Ada Permanent, kecuali jika ada perpanjangan harga sewa)
 =>Bot Otomatis keluar jika sudah mencapai masa aktif*`
-conn.sendMessage(from, { text: tekss, contextInfo: { mentionedJid: [sender]} }, { quoted: m })
+conn.sendMessage(from, { text: tekssa, contextInfo: { mentionedJid: [sender]} }, { quoted: m })
 break
 			case prefix+'owner':
 			    for (let x of ownerNumber) {
