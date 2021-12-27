@@ -36,6 +36,7 @@ const { y2mateA, y2mateV } = require('../scrape/y2mate.js')
 const { Gempa, Cuaca} = require("../scrape/bmkg")
 const { lirikLagu } = require('../scrape/lirik.js')
 const { chord } = require('../scrape/chord.js')
+const { igstory } = require('../scrape/igstory.js')
 
 
 //Tebal&Renggang
@@ -273,6 +274,21 @@ reply(`${stdout}`)
 		if (isGroup && isCmd) console.log('->[\x1b[1;32mCMD\x1b[1;37m]', color(moment(msg.messageTimestamp *1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(groupName))
 		
 		switch(command) {
+case prefix+'igs': case prefix+'igstory': case prefix+'instastory':
+if (!q) return reply(`Contoh:\n${command} ekooju`)
+reply(mess.wait)
+igstory(q).then(data => {
+if(data.medias.length > 10) return  reply(`Maaf ${pushname} file media terlalu banyak, maksimal 10`)
+reply(`✅Instastory Download From IG\n\n${mono}[ Info Account ]${mono}\n≻ Username: ${data.user.username}\n≻Jumlah Media: ${data.medias.length}\n≻ Followers: ${data.user.followers}\n≻ Following: ${data.user.following}\n≻ Bio: ${data.user.biography}`)
+for (let i of data.medias) {
+				 if (i.fileType === "mp4") {
+				   conn.sendMessage(from, { video: { url: i.downloadUrl }, caption: mess.success}, {quoted: msg })
+				 } else if (i.fileType === "jpg") {
+				   conn.sendMessage(from, { image: { url: i.downloadUrl }, caption: mess.success}, {quoted: msg })
+			         }
+			       }
+}).catch(err => reply(mess.error.api))
+break
 case prefix+'attp':
 if (args.length === 1) return reply(`Contoh:\n${command} ${pushname}`)
 conn.sendMessage(from, {sticker: await getBuffer(`https://api.xteam.xyz/attp?file&text=${encodeURIComponent(q)}`)}, {quoted: m}).catch(err => reply(mess.error.api))
