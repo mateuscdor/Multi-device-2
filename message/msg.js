@@ -234,7 +234,7 @@ conn.sendMessage(from, { text: text, mentions: h})
 			{ urlButton: { displayText: `Website!`, url : `http://api-xcoders.xyz/`} },
 			{ quickReplyButton: { displayText: `🧑 Owner`, id: `${prefix}owner` } },
 			{ quickReplyButton: { displayText: `💰Sewa Bot `, id: `${prefix}donate` } },
-			{ quickReplyButton: { displayText: `📶 Runtime`, id: `${prefix}runtime` } }
+			{ quickReplyButton: { displayText: `📶 Statistic`, id: `${prefix}stat` } }
 		]
         
 		const isImage = (type == 'imageMessage')
@@ -547,8 +547,8 @@ let anu = allmenu(conn, prefix, pushname, ucapanWaktu)
                                 }  
                             }, {
                                 quickReplyButton: {
-                                    displayText: '📶 Statistic',
-                                    id: `${prefix}stat`
+                                    displayText: '📶 Runtime',
+                                    id: `${prefix}runtime`
                                 }
                             }]
                         }
