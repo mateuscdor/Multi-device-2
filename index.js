@@ -72,7 +72,7 @@ const starting = new Spinner(chalk.cyan(` Preparing After Connect`))
 const reconnect = new Spinner(chalk.redBright(` Reconnecting WhatsApp Bot`))
 
 const connectToWhatsApp = async () => {
-	const conn = makeWASocket({ printQRInTerminal: true, logger: logg({ level: 'fatal' }), auth: state })
+	const conn = makeWASocket({ printQRInTerminal: true, logger: logg({ level: 'silent' }), auth: state })
 	title()
 	
 	/* Auto Update */
