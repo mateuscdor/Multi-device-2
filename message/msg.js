@@ -205,6 +205,7 @@ conn.sendMessage(from, { text: text, mentions: h})
 			return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/, 'gi'))
 		}
 		const reply = (teks) => {
+                        conn.sendPresenceUpdate('composing', from)
 			conn.sendMessage(from, { text: teks }, { quoted: msg })
 		}
 		const textImg = (teks) => {
@@ -273,6 +274,20 @@ reply(`${stdout}`)
 		if (!isGroup && isCmd) console.log('->[\x1b[1;32mCMD\x1b[1;37m]', color(moment(msg.messageTimestamp * 1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname))
 		if (isGroup && isCmd) console.log('->[\x1b[1;32mCMD\x1b[1;37m]', color(moment(msg.messageTimestamp *1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(groupName))
 		
+
+                //NoPref
+  if (/https:\/\/.+\.tiktok.+/g.test(chats)) {
+             url = chats.match(/https:\/\/.+\.tiktok.+/g)[0]
+                     reply(mess.wait)
+			    res = await tiktok2(url)
+conn.sendMessage(from, {
+				 video: { url: res.data.video },
+				 caption: `✅Sukses Download Video Tiktok\n\nJika ingin mengubah ke audio/music, tekan tombol dibawah, jika tidak terlihat ketik ${prefix}tiktokaudio ${q}`,
+				 buttons: [{buttonId: `${prefix}tiktokaudio ${url}`, buttonText: { displayText: "Audio" }, type: 1 }],
+				 footer: "Create by Wans-Bot"
+			      }, { quoted: msg }).catch(() => reply(mess.error.api))
+			}
+
 		switch(command) {
 case prefix+'igs': case prefix+'igstory': case prefix+'instastory':
 if (!q) return reply(`Contoh:\n${command} ekooju`)
