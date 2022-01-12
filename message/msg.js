@@ -596,7 +596,12 @@ let anu = allmenu(conn, prefix, pushname, ucapanWaktu)
 			case prefix+'runtime':
 			reply(`Bot Aktif Sejak\n${runtime(process.uptime())}`)
 			    break
-			case prefix+'speed': case prefix+'ping': case prefix+'stat': case prefix+'statistic':
+case prefix+'speed': case prefix+'ping': case prefix+'stat': case prefix+'statistic':
+let timestamp = speed();
+                            let latensi = speed() - timestamp
+                            reply(`${latensi.toFixed(4)} Second`)
+break
+			/*case prefix+'speed': case prefix+'ping': case prefix+'stat': case prefix+'statistic':
                 let timestamp = speed()
 
                 let latensi = speed() - timestamp
@@ -635,7 +640,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 
                 m.reply(respon)
 
-            break
+            break*/
 case prefix+'donate': case prefix +'donasi': case prefix+'hargasewa':
 tekssa = `Halo @${sender.split("@s.whatsapp.net")[0]} 👋
 Berikut adalah list harga untuk sewa bot ini
