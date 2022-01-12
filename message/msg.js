@@ -282,7 +282,7 @@ reply(`${stdout}`)
 			    res = await tiktok2(url)
 conn.sendMessage(from, {
 				 video: { url: res.data.video },
-				 caption: `✅Sukses Download Video Tiktok\n\nJika ingin mengubah ke audio/music, tekan tombol dibawah, jika tidak terlihat ketik ${prefix}tiktokaudio ${q}`,
+				 caption: `✅Sukses Download Video Tiktok\n\nJika ingin mengubah ke audio/music, tekan tombol dibawah, jika tidak terlihat ketik ${prefix}tiktokaudio ${url}`,
 				 buttons: [{buttonId: `${prefix}tiktokaudio ${url}`, buttonText: { displayText: "Audio" }, type: 1 }],
 				 footer: "Create by Wans-Bot"
 			      }, { quoted: msg }).catch(() => reply(mess.error.api))
@@ -326,7 +326,7 @@ title: a.title, description: `Channel: ${a.author.name} | Durasi: ${a.duration}`
 })
 }
     const button = {
-        title: `Hasil Pencarian Dari`,
+        title: `Hasil Pencarian Dari ${q}`,
         description: "Silahkan Tap Tombol Dibawah!",
         footerText: `Create by Wans-Bot`,
         buttonText: 'Tap Disini!',
