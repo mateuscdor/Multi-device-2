@@ -93,7 +93,11 @@ module.exports = async(conn, msg, m, setting) => {
 		const groupMembers = isGroup ? groupMetadata.participants : ''
 		const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : ''
 		const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
-		const isGroupAdmins = groupAdmins.includes(sender) || false
+		//const isGroupAdmins = groupAdmins.includes(sender) || false
+                const isGroupAdmins = []
+            for (let i of groupMembers) {
+                i.isAdmin ? groupAdmins.push(i.jid) : ''
+            }
 		
 		const metadataGroups = isGroup ? await conn.groupMetadata(from) : '';
 		const countAdminsGroups = isGroup ? metadataGroups.participants.map(map => map.admin == null).filter(fill => fill == true).length : '';
