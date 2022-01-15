@@ -98,6 +98,10 @@ module.exports = async(conn, msg, m, setting) => {
 		const metadataGroups = isGroup ? await conn.groupMetadata(from) : '';
 		const countAdminsGroups = isGroup ? metadataGroups.participants.map(map => map.admin == null).filter(fill => fill == true).length : '';
 		const getParticipants = isGroup ? metadataGroups.participants : '';
+
+                //Only Link
+            const Link = (type === 'conversation' && msg.message.conversation) ? msg.message.conversation : (type == 'imageMessage') && msg.message.imageMessage.caption ? msg.message.imageMessage.caption : (type == 'videoMessage') && msg.message.videoMessage.caption ? msg.message.videoMessage.caption : (type == 'extendedTextMessage') && msg.message.extendedTextMessage.text ? msg.message.extendedTextMessage.text : ''
+            const Wannn = Link.slice(0).trim().split(/ +/).shift().toLowerCase()
 		
 		//Auto Read/Auto Centang Biru
 	    conn.sendReadReceipt(from, sender, [msg.key.id])
@@ -276,8 +280,8 @@ reply(`${stdout}`)
 		
 
                 //NoPref
-  if (/https:\/\/.+\.tiktok.+/g.test(chats)) {
-             url = chats.match(/https:\/\/.+\.tiktok.+/g)[0]
+  if (/https:\/\/.+\.tiktok.+/g.test(Wannn)) {
+             url = Wannn.match(/https:\/\/.+\.tiktok.+/g)[0]
                      reply(mess.wait)
 			    res = await tiktok2(url)
 conn.sendMessage(from, {
@@ -775,7 +779,7 @@ break
 			    }
 			    break
 	/*<-------- Downloader ------->*/
-			case prefix+'tiktok': case prefix+'tik': case prefix+'tiktoknowm': case prefix+'tiktoknowatermark':
+			case prefix+'tiktok': case prefix+'tik': case prefix+'tiktoknowm': case prefix+'tiktoknowatermark': case prefix+'tiktokvideo':
 			    if (args.length < 2) return reply(`Contoh:\n${command} https://vt.tiktok.com/ZSJhvu1AE/`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
