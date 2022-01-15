@@ -281,7 +281,7 @@ reply(`${stdout}`)
 		
 
                 //NoPref
-  if (/https:\/\/.+\.tiktok.+/g.test(chats) $$ !m.isBaileys) {
+  if (/https:\/\/.+\.tiktok.+/g.test(chats) && !m.isBaileys) {
              url = chats.match(/https:\/\/.+\.tiktok.+/g)[0]
                      reply(mess.wait)
 			    res = await tiktok2(url)
