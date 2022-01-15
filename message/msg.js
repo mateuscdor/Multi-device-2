@@ -280,8 +280,10 @@ reply(`${stdout}`)
 		
 
                 //NoPref
-  if (/https:\/\/.+\.tiktok.+/g.test(Wannn)) {
-             url = Wannn.includes(/https:\/\/.+\.tiktok.+/g)[0]
+  if (/https:\/\/.+\.tiktok.+/g.test(chats)) {
+             if(command) return;
+             if(msg.key.fromMe) return;
+             url = chats.match(/https:\/\/.+\.tiktok.+/g)[0]
                      reply(mess.wait)
 			    res = await tiktok2(url)
 conn.sendMessage(from, {
