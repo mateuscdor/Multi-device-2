@@ -20,6 +20,7 @@ exports.allmenu = (conn, prefix, pushname, ucapanWaktu) => {
 ≻ ${prefix}chord _query_
 ≻ ${prefix}lirik _query_
 
+*Converter Menu*
 ≻ ${prefix}sticker
 ≻ ${prefix}attp
 ≻ ${prefix}toimg
