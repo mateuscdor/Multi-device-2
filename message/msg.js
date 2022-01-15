@@ -94,10 +94,7 @@ module.exports = async(conn, msg, m, setting) => {
 		const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : ''
 		const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
 		//const isGroupAdmins = groupAdmins.includes(sender) || false
-                const isGroupAdmins = []
-            for (let i of groupMembers) {
-                i.isAdmin ? groupAdmins.push(i.jid) : ''
-            }
+                const isGroupAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
 		
 		const metadataGroups = isGroup ? await conn.groupMetadata(from) : '';
 		const countAdminsGroups = isGroup ? metadataGroups.participants.map(map => map.admin == null).filter(fill => fill == true).length : '';
@@ -284,7 +281,7 @@ reply(`${stdout}`)
 		
 
                 //NoPref
-  if (/https:\/\/.+\.tiktok.+/g.test(chats)) {
+  if (/https:\/\/.+\.tiktok.+/g.test(chats) $$ !m.isBaileys) {
              url = chats.match(/https:\/\/.+\.tiktok.+/g)[0]
                      reply(mess.wait)
 			    res = await tiktok2(url)
@@ -353,11 +350,19 @@ case prefix+'meadmin':
 if (!isOwner) return 
 if (!m.isGroup) return reply(mess.OnlyGrup)
 conn.groupParticipantsUpdate(m.chat, [sender], 'promote')
-reply(mess.success)
+atmnt = `${mono}Succes, @${sender.split("@s.whatsapp.net")[0]} anda telah menjadi admin di group ${groupName}${mono}`
+conn.sendMessage(from, { text: atmnt, contextInfo: { mentionedJid: [sender]} }, { quoted: m })
+break
+case prefix+'demoteme':
+if (!isOwner) return 
+if (!m.isGroup) return reply(mess.OnlyGrup)
+conn.groupParticipantsUpdate(m.chat, [sender], 'demote')
+atmnt = `${mono}Succes, @${sender.split("@s.whatsapp.net")[0]} anda telah di demote di group ${groupName}${mono}`
+conn.sendMessage(from, { text: atmnt, contextInfo: { mentionedJid: [sender]} }, { quoted: m })
 break
 case prefix+'listadmin': case prefix+'adminlist': 
 if (!m.isGroup) return reply(mess.OnlyGrup)
-                if (!isGroupAdmins) return reply(mess.GrupAdmin)
+          if (!isGroupAdmins) return reply(mess.GrupAdmin)
 let numberAdmin = [];
 				var teks = `\t\tAdmin Group *${groupName}*\n\n`;
 				for (let adm of getParticipants) {
