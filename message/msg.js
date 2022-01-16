@@ -279,7 +279,7 @@ if (
       );
       nkh = sender
      conn.sendMessage(from, { text: `${mono}Terdeteksi @${nkh.split("@")[0]} Melakukan Hidetag!${mono}`, contextInfo: { mentionedJid: [nkh]} }, { quoted: m })
-
+}
 
 		if (chats.startsWith('$') && isOwner) {
 
