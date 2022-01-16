@@ -269,8 +269,7 @@ conn.sendMessage(from, { text: text, mentions: h})
 		
 //Deteksi Hidetag
 if (
-      isGroup &&
-      m.message[m.mtype]?.contextInfo?.mentionedJid?.length ==
+      isGroup && !m.key.fromMe && m.message[m.mtype]?.contextInfo?.mentionedJid?.length ==
         groupMembers.length
     ) {
       console.log(
