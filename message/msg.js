@@ -279,7 +279,6 @@ reply(`${stdout}`)
 		// Logs;
 		if (!isGroup && isCmd) console.log('->[\x1b[1;32mCMD\x1b[1;37m]', color(moment(msg.messageTimestamp * 1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname))
 		if (isGroup && isCmd) console.log('->[\x1b[1;32mCMD\x1b[1;37m]', color(moment(msg.messageTimestamp *1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(groupName))
-		
 
                 //NoPref
   if (/https:\/\/.+\.tiktok.+/g.test(chats) && !m.isBaileys) {
@@ -293,6 +292,20 @@ conn.sendMessage(from, {
 				 footer: "Create by Wans-Bot"
 			      }, { quoted: msg }).catch(() => reply(mess.error.api))
 			}
+
+
+                //Deteksi Hidetag
+if (
+      isGroup &&
+      m.message[m.mtype]?.contextInfo?.mentionedJid?.length ==
+        groupMembers.length
+    ) {
+      console.log(
+        color("[ANTI-HIDETAG]", "red"),
+        color(`@${sender.split("@")[0]} mengirim pesan hidetag`, "white")
+      );
+      nkh = sender
+     conn.sendMessage(from, { text: `${mono}Terdeteksi @${nkh.split("@")[0]} Melakukan Hidetag!${mono}`, contextInfo: { mentionedJid: [nkh]} }, { quoted: m })
 
 		switch(command) {
 case prefix+'igs': case prefix+'igstory': case prefix+'instastory':
