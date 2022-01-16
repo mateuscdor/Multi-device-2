@@ -289,6 +289,12 @@ reply(`${stdout}`)
 }
 })
 }
+
+                //CekPing
+                if(Wannn.includes('cekping')){
+                if (!isOwner) return
+                reply(`${moment().millisecond()} ms`)
+}
 		// Logs;
 		if (!isGroup && isCmd) console.log('->[\x1b[1;32mCMD\x1b[1;37m]', color(moment(msg.messageTimestamp * 1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname))
 		if (isGroup && isCmd) console.log('->[\x1b[1;32mCMD\x1b[1;37m]', color(moment(msg.messageTimestamp *1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(groupName))
