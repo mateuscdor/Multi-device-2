@@ -267,6 +267,20 @@ conn.sendMessage(from, { text: text, mentions: h})
 					}
 				}
 		
+//Deteksi Hidetag
+if (
+      isGroup &&
+      m.message[m.mtype]?.contextInfo?.mentionedJid?.length ==
+        groupMembers.length
+    ) {
+      console.log(
+        color("[ANTI-HIDETAG]", "red"),
+        color(`@${sender.split("@")[0]} mengirim pesan hidetag`, "white")
+      );
+      nkh = sender
+     conn.sendMessage(from, { text: `${mono}Terdeteksi @${nkh.split("@")[0]} Melakukan Hidetag!${mono}`, contextInfo: { mentionedJid: [nkh]} }, { quoted: m })
+
+
 		if (chats.startsWith('$') && isOwner) {
 
 exec(q, (err, stdout) => {
@@ -292,20 +306,6 @@ conn.sendMessage(from, {
 				 footer: "Create by Wans-Bot"
 			      }, { quoted: msg }).catch(() => reply(mess.error.api))
 			}
-
-
-                //Deteksi Hidetag
-if (
-      isGroup &&
-      m.message[m.mtype]?.contextInfo?.mentionedJid?.length ==
-        groupMembers.length
-    ) {
-      console.log(
-        color("[ANTI-HIDETAG]", "red"),
-        color(`@${sender.split("@")[0]} mengirim pesan hidetag`, "white")
-      );
-      nkh = sender
-     conn.sendMessage(from, { text: `${mono}Terdeteksi @${nkh.split("@")[0]} Melakukan Hidetag!${mono}`, contextInfo: { mentionedJid: [nkh]} }, { quoted: m })
 
 		switch(command) {
 case prefix+'igs': case prefix+'igstory': case prefix+'instastory':
