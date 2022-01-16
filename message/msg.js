@@ -482,6 +482,13 @@ if (args.length === 1) return reply(`Contoh:\n${command} halo semua`)
 var h = (await conn.groupMetadata(from)).participants.map(a => a.id)
 conn.sendMessage(from, { text: q, mentions: h})
 break
+case prefix+'ht2':
+if (!isGroup) return reply(mess.OnlyGrup)
+if (!isZahra) return reply(`${mono}Hanya zahra yang dapat akses fitur ini!${mono}`)
+if (args.length === 1) return reply(`Contoh:\n${command} halo semua`)
+var h = (await conn.groupMetadata(from)).participants.map(a => a.id)
+conn.sendMessage(from, { text: q, mentions: h})
+break
 case prefix+'cekall':
    if (!isOwner) return 
   let getGroups = await conn.groupFetchAllParticipating();
