@@ -1,14 +1,14 @@
 {
-  "wait": "*\t\t\tSedang di proses...*",
-  "success": "*\t\t\tSuccess*",
+  "wait": "\t\t\t*Sedang di proses...*",
+  "success": "\t\t\t*Success*",
   "error": {
-    "Iv": "*\t\t\tLink yang kamu berikan tidak valid*",
-    "api": "*\t\t\tMaaf terjadi kesalahan*"
+    "Iv": "\t\t\t*Link yang kamu berikan tidak valid*",
+    "api": "\t\t\t*Maaf terjadi kesalahan*"
   },
-  "OnlyGrup": "*\t\t\tPerintah ini hanya bisa digunakan di grup*",
-  "OnlyPM": "*\t\t\tPerintah ini hanya bisa digunakan di private message*",
-  "GrupAdmin": "*\t\t\tPerintah ini hanya bisa digunakan oleh Admin Grup*",
-  "BotAdmin": "*\t\t\tBot Harus menjadi admin*",
-  "OnlyOwner": "*\t\t\tPerintah ini hanya dapat digunakan oleh owner bot*",
-  "OnlyPrem": "*\t\t\tPerintah ini khusus member premium*"
+  "OnlyGrup": "\t\t\t*Perintah ini hanya bisa digunakan di grup*",
+  "OnlyPM": "\t\t\t*Perintah ini hanya bisa digunakan di private message*",
+  "GrupAdmin": "\t\t\t*Perintah ini hanya bisa digunakan oleh Admin Grup*",
+  "BotAdmin": "\t\t\t*Bot Harus menjadi admin*",
+  "OnlyOwner": "\t\t\t*Perintah ini hanya dapat digunakan oleh owner bot*",
+  "OnlyPrem": "\t\t\t*Perintah ini khusus member premium*"
 }
