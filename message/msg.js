@@ -300,10 +300,11 @@ reply(`${stdout}`)
 		if (isGroup && isCmd) console.log('->[\x1b[1;32mCMD\x1b[1;37m]', color(moment(msg.messageTimestamp *1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(groupName))
 
                 //NoPref
-  if (/https:\/\/.+\.tiktok.+/g.test(chats) && !m.isBaileys) {
+             if (/https:\/\/.+\.tiktok.+/g.test(chats) && !m.isBaileys) {
              url = chats.match(/https:\/\/.+\.tiktok.+/g)[0]
-                     reply(mess.wait)
-			    res = await tiktok2(url)
+             if (chats.startsWith(prefix) return
+             reply(mess.wait)
+             res = await tiktok2(url)
 conn.sendMessage(from, {
 				 video: { url: res.data.video },
 				 caption: `✅Sukses Download Video Tiktok\n\nJika ingin mengubah ke audio/music, tekan tombol dibawah, jika tidak terlihat ketik ${prefix}tiktokaudio ${url}`,
