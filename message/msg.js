@@ -302,7 +302,6 @@ reply(`${stdout}`)
                 //NoPref
              if (/https:\/\/.+\.tiktok.+/g.test(chats) && !m.isBaileys && !chats.startsWith(prefix)) {
              url = chats.match(/https:\/\/.+\.tiktok.+/g)[0]
-             if (chats.startsWith(prefix) return
              reply(mess.wait)
              res = await tiktok2(url)
 conn.sendMessage(from, {
