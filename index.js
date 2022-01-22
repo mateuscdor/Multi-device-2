@@ -155,11 +155,80 @@ const connectToWhatsApp = async () => {
 			: console.log(mylog('Wa web terlogout...'))
 		}
 	})
-	conn.ev.on('creds.update', () => saveState)
-	return conn
-}
+	conn.ev.on('creds.update', saveState)
 
-  conn.downloadAndSaveMediaMessage = async (message, filename, attachExtension = true) => {
+    // Add Other
+
+    /**
+     * 
+     * @param {*} jid 
+     * @param {*} text 
+     * @param {*} quoted 
+     * @param {*} options 
+     * @returns 
+     */
+    conn.sendText = (jid, text, quoted = '', options) => conn.sendMessage(jid, { text: text, ...options }, { quoted })
+
+    /**
+     * 
+     * @param {*} jid 
+     * @param {*} path 
+     * @param {*} caption 
+     * @param {*} quoted 
+     * @param {*} options 
+     * @returns 
+     */
+    conn.sendImage = async (jid, path, caption = '', quoted = '', options) => {
+        let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await fetch(path)).buffer() : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
+        return await conn.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted })
+    }
+
+    /**
+     * 
+     * @param {*} jid 
+     * @param {*} path 
+     * @param {*} caption 
+     * @param {*} quoted 
+     * @param {*} options 
+     * @returns 
+     */
+    conn.sendVideo = async (jid, path, caption = '', quoted = '', gif = false, options) => {
+        let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await fetch(path)).buffer() : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
+        return await conn.sendMessage(jid, { video: buffer, caption: caption, gifPlayback: gif, ...options }, { quoted })
+    }
+
+    /**
+     * 
+     * @param {*} jid 
+     * @param {*} path 
+     * @param {*} quoted 
+     * @param {*} mime 
+     * @param {*} options 
+     * @returns 
+     */
+    conn.sendAudio = async (jid, path, quoted = '', ptt = false, options) => {
+        let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await fetch(path)).buffer() : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
+        return await conn.sendMessage(jid, { audio: buffer, ptt: ptt, ...options }, { quoted })
+    }
+
+    /**
+     * 
+     * @param {*} jid 
+     * @param {*} text 
+     * @param {*} quoted 
+     * @param {*} options 
+     * @returns 
+     */
+    conn.sendTextWithMentions = async (jid, text, quoted, options = {}) => conn.sendMessage(jid, { text: text, contextInfo: { mentionedJid: [...text.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net') }, ...options }, { quoted })
+	
+    /**
+     * 
+     * @param {*} message 
+     * @param {*} filename 
+     * @param {*} attachExtension 
+     * @returns 
+     */
+    conn.downloadAndSaveMediaMessage = async (message, filename, attachExtension = true) => {
         let quoted = message.msg ? message.msg : message
         let mime = (message.msg || message).mimetype || ''
         let messageType = mime.split('/')[0].replace('application', 'document') ? mime.split('/')[0].replace('application', 'document') : mime.split('/')[0]
@@ -232,6 +301,30 @@ const connectToWhatsApp = async () => {
         await conn.relayMessage(jid, waMessage.message, { messageId:  waMessage.key.id })
         return waMessage
     }
+
+    /**
+     * 
+     * @param {*} path 
+     * @returns 
+     */
+    conn.getFile = async (path) => {
+        let res
+		let data = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,` [1], 'base64') : /^https?:\/\//.test(path) ? await (res = await fetch(path)).buffer() : fs.existsSync(path) ? fs.readFileSync(path) : typeof path === 'string' ? path : Buffer.alloc(0)
+		if (!Buffer.isBuffer(data)) throw new TypeError('Result is not a buffer')
+		let type = await FileType.fromBuffer(data) || {
+			mime: 'application/octet-stream',
+			ext: '.bin'
+		}
+
+		return {
+			res,
+			...type,
+			data
+		}
+    }
+
+    return conn
+}
 
 connectToWhatsApp()
 .catch(err => console.log(err))
