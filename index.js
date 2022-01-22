@@ -30,7 +30,7 @@ let mono = '*'
 
 function title() {
       console.clear()
-	console.log(chalk.bold.green(figlet.textSync('WansBot|MultiDevice', {
+	console.log(chalk.bold.green(figlet.textSync('WansBot MultiDevice', {
 		font: 'Standard',
 		horizontalLayout: 'default',
 		verticalLayout: 'default',
@@ -72,7 +72,7 @@ const starting = new Spinner(chalk.cyan(` Preparing After Connect`))
 const reconnect = new Spinner(chalk.redBright(` Reconnecting WhatsApp Bot`))
 
 const connectToWhatsApp = async () => {
-	const conn = makeWASocket({ printQRInTerminal: true, logger: logg({ level: 'silent' }), auth: state })
+	const conn = makeWASocket({ printQRInTerminal: true, logger: logg({ level: 'silent' }), browser: ['conn Multi Device','Safari','1.0.0'], auth: state })
 	title()
 	
 	/* Auto Update */
