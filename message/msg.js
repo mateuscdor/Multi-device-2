@@ -21,6 +21,7 @@ const googleIt = require('google-it')
 const brainly = require('brainly-scraper')
 const os = require('os')
 const child = require("child_process")
+const translate = require('@vitalets/google-translate-api')
 
 //Exif&Stiker
 const { exif } = require("./../lib/exif")
@@ -316,6 +317,18 @@ conn.sendMessage(from, {
 			}
 
 		switch(command) {
+case prefix+'tr': case prefix+'translate': 
+if (!q) return reply(`Contoh:\n${command} [Kode Bahasa] house\nKode bahasa bisa cek di https://cloud.google.com/translate/docs/languages`)
+kode_negara = args.join(" ")
+teks = msg.message.extendedTextMessage.contextInfo.quotedMessage.conversation
+translate(`${teks}`,{to:`${kode_negara}`}).then( res => {
+ini_txt = `*Translate*
+                    
+Language detected : ${res.from.language.iso}
+Translate : ${res.text}`
+reply(ini_txt)
+})
+break
 case prefix+'igs': case prefix+'igstory': case prefix+'instastory':
 if (!q) return reply(`Contoh:\n${command} ekooju`)
 reply(mess.wait)
