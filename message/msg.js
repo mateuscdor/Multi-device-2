@@ -38,6 +38,9 @@ const { lirikLagu } = require('../scrape/lirik.js')
 const { chord } = require('../scrape/chord.js')
 const { igstory } = require('../scrape/igstory.js')
 
+//Y2mate Eror
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+
 
 //Tebal&Renggang
 let mono = '*'
