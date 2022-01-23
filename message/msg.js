@@ -320,7 +320,7 @@ conn.sendMessage(from, {
 case prefix+'tr': case prefix+'translate': 
 if (!q) return reply(`Contoh:\n${command} [Kode Bahasa] house\nKode bahasa bisa cek di https://cloud.google.com/translate/docs/languages`)
 kode_negara = q
-teks = msg.message.extendedTextMessage.contextInfo.quotedMessage.conversation
+teks = msg.message.extendedTextMessage.contextInfo.quotedMessage.conversation) || args[0]
 translate(`${teks}`,{to:`${kode_negara}`}).then( res => {
 ini_txt = `*Translate*
                     
