@@ -319,27 +319,15 @@ conn.sendMessage(from, {
 		switch(command) {
 case prefix+'tr': case prefix+'translate': 
 if (!q) return reply(`Contoh:\n${command} [Kode Bahasa] house\nKode bahasa bisa cek di https://cloud.google.com/translate/docs/languages`)
-kode_negara = q
-if (msg.message.extendedTextMessage) {
+kode_negara = args[0]
 teks = msg.message.extendedTextMessage.contextInfo.quotedMessage.conversation
 translate(`${teks}`,{to:`${kode_negara}`}).then( res => {
 ini_txt = `*Translate*
                     
 Language detected : ${res.from.language.iso}
 Translate : ${res.text}`
-reply(ini_txt)})
-} else if (!msg.message.extendedTextMessage) {
-
-translate(`${q.slice(3)}`,{to:`${kode_negara}`}).then( res => {
-ini_txt = `*Translate*
-                    
-Language detected : ${res.from.language.iso}
-Translate : ${res.text}`
 reply(ini_txt)
 })
-} else {
-reply (`Contoh ${command} id house`)
-}
 break
 case prefix+'igs': case prefix+'igstory': case prefix+'instastory':
 if (!q) return reply(`Contoh:\n${command} ekooju`)
