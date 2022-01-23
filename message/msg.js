@@ -319,7 +319,7 @@ conn.sendMessage(from, {
 		switch(command) {
 case prefix+'tr': case prefix+'translate': 
 if (!q) return reply(`Contoh:\n${command} [Kode Bahasa] house\nKode bahasa bisa cek di https://cloud.google.com/translate/docs/languages`)
-kode_negara = q.slice(2)
+kode_negara = args[0]
 
 if (msg.message.extendedTextMessage) {
 teks = msg.message.extendedTextMessage.contextInfo.quotedMessage.conversation
